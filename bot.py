@@ -13,7 +13,7 @@ async def on_ready():
     print("BOT READY")
 
 @bot.event
-async def on_member_join(ctx, member):
+async def on_member_join(ctx):
     role = discord.utils.get(ctx.guild.roles, name='•member•')#•member•
     await ctx.add_roles(role)
   
