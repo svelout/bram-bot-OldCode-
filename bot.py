@@ -2,7 +2,6 @@ import discord
 from discord.ext.commands import bot
 from discord.ext import commands
 from discord import member
-import hibye
 
 intents = discord.Intents.default()
 intents.members = True
