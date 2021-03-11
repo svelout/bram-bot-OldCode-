@@ -6,7 +6,7 @@ from discord import member
 intents = discord.Intents.default()
 intents.members = True
 
-bot = commands.Bot(command_prefix=".", intents=intents)
+bot = commands.Bot(command_prefix="?", intents=intents)
 
 class BotData:
     def _init__(self):
@@ -34,7 +34,7 @@ async def on_member_remove(member):
 @bot.command()
 async def set_welcome_channel(ctx, channel_name=None):
     if channel_name != None:
-        for channel in ctx.guild.chanels:
+        for channel in ctx.guild.channels:
             if channel.name == channel_name:
                 botdata.welcome_channel = channel
                 await ctx.channel.send(f"Welcome channel = {channel.name}")
