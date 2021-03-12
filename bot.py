@@ -8,9 +8,6 @@ intents.members = True
 
 bot = commands.Bot(command_prefix="?", intents=intents)
 
-class BotData:
-	def__init__(self):
-		self.role=None
 
 @bot.event
 async def on_ready():
@@ -18,15 +15,14 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(ctx):
-    if botdata.role_name=None:
-    	await botdata.add_roles(role_name)
+   await ctx.add_roles(role)
     	
     
 @bot.command()
 async def set_role(ctx, role=None):
   if role != None:
   	for role in ctx.guild.roles:
-  		if role.name == role_name:
+  		if role.name == role:
   			role = guild.role
   			await ctx.send('default role was: {role.name}')
   else
