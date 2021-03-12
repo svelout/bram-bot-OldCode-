@@ -9,7 +9,7 @@ intents.members = True
 bot = commands.Bot(command_prefix="?", intents=intents)
 
 class BotData:
-	def_init_(self):
+	def__init__(self):
 		self.role=None
 
 @bot.event
@@ -20,6 +20,7 @@ async def on_ready():
 async def on_member_join(ctx):
     if botdata.role_name=None:
     	await botdata.add_roles(role_name)
+    	
     
 @bot.command()
 async def set_role(ctx, role=None):
