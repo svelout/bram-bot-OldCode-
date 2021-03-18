@@ -28,8 +28,9 @@ async def kick(ctx, member : discord.Member,reason):
     emb.add_field(name='Member',value=member.mention,inline=False)
     emb.add_field(name='Reason ',value=reason,inline=False)
     emb.add_field(name='Time',value=time,inline=False)
-    await ctx.kick()
+    await member.kick()
     await ctx.send(embed = emb)
+    await member.send('Вы были кикнуты с сервера')
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
@@ -43,6 +44,12 @@ async def mute(ctx, member : discord.Member,reason):
     await member.add_roles(rolemute)
     await ctx.send(embed = emb)
     await asyncio.sleep()
+    await member.remove_roles(rolemute)
+
+@bot.command()
+@commands.has_permissions(view_audit_log=True)
+async def unmute(ctx, member : discord.Member,reason):
+    rolemute = discord.utils.get(ctx.guild.roles, id=822120846725218385)
     await member.remove_roles(rolemute)
 
  
