@@ -40,10 +40,10 @@ async def mute(ctx, member : discord.Member,reason):
     emb.add_field(name='Member',value=member.mention,inline=False)
     emb.add_field(name='Reason ',value=reason,inline=False)
     emb.add_field(name='Time',value=time,inline=False)
-    await ctx.add_roles(rolemute)
+    await member.add_roles(rolemute)
     await ctx.send(embed = emb)
     await asyncio.sleep()
-    await ctx.remove_roles(rolemute)
+    await member.remove_roles(rolemute)
 
  
 bot.run('Nzc2NTMxOTc4OTcxMTE5NjQ2.X62Pww.Zzq1j2Z8LycA-W8n4cW99DsiFzU')
