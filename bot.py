@@ -22,12 +22,11 @@ async def on_member_join(ctx):
 @bot.command(name='kick')
 @commands.has_permissions(view_audit_log=True)
 async def kick(ctx, member : discord.Member,reason):
-    role_mute = discord.utils.get(ctx.guild.roles, id=822120846725218385)
     emb = discord.Embed(title='Mute', color=0xff0000)
     emb.add_field(name='Moderator',value=ctx.message.author.mention,inline=False)
     emb.add_field(name='Member',value=member.mention,inline=False)
     emb.add_field(name='Reason ',value=reason,inline=False)
-    await member.kick()
+    await member.kick(reason)
     await ctx.send(embed = emb)
     await member.send('Вы были кикнуты с сервера')
 
