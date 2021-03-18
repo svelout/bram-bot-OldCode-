@@ -1,7 +1,7 @@
 import discord
 from discord.ext.commands import bot
 from discord.ext import commands
-from discord import guild, member
+from discord import guild, member, user
 import time
 import asyncio
 
@@ -18,7 +18,7 @@ async def on_ready():
 async def on_member_join(ctx):
     role = discord.utils.get(ctx.guild.roles, name='•member•')#•member•
     await ctx.add_roles(role)
-    await ctx.send(f'Привет {member.name}! Добро пожаловать на сервер редьюсеров, здесь ты можешь найти себе много новых собеседников и просто приятно провести время. Удачи!')
+    await ctx.send(f'Привет {user.name}! Добро пожаловать на сервер редьюсеров, здесь ты можешь найти себе много новых собеседников и просто приятно провести время. Удачи!')
 
 @bot.command(name='kick')
 @commands.has_permissions(view_audit_log=True)
@@ -50,6 +50,7 @@ async def mute(ctx, member : discord.Member,reason):
 async def unmute(ctx, member : discord.Member,reason):
     rolemute = discord.utils.get(ctx.guild.roles, id=822120846725218385)
     await member.remove_roles(rolemute)
+
 
  
 bot.run('Nzc2NTMxOTc4OTcxMTE5NjQ2.X62Pww.Zzq1j2Z8LycA-W8n4cW99DsiFzU')
