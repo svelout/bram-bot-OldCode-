@@ -18,7 +18,7 @@ async def on_ready():
 async def on_member_join(ctx):
     role = discord.utils.get(ctx.guild.roles, name='•member•')#•member•
     await ctx.add_roles(role)
-    await ctx.send(f'Привет! Добро пожаловать на сервер редьюсеров, здесь ты можешь найти себе много новых собеседников и просто приятно провести время. Удачи!')
+    await ctx.send(f'Привет {member.mention}! Добро пожаловать на сервер редьюсеров, здесь ты можешь найти себе много новых собеседников и просто приятно провести время. Удачи!')
 
 @bot.command(name='kick')
 @commands.has_permissions(view_audit_log=True)
