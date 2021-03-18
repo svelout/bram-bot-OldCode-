@@ -25,13 +25,13 @@ async def on_member_kick(ctx, member : discord.Member=None, *, reason=None):
 
 @bot.command()
 async def mute(ctx, member : discord.Member=None, *,reason=None, time=None):
-    role2 = discord.utils.get(ctx.guild.roles, name='Muted')
+    role_mute = discord.utils.get(ctx.guild.roles, name='Muted')
     emb = discord.Embed(title='Mute', color=0xff0000)
     emb.add_field(name='Moderator',value=ctx.message.author.mention,inline=False)
     emb.add_field(name='Member',value=member.mention,inline=False)
     emb.add_field(name='Reason ',value=reason,inline=False)
     emb.add_field(name='Time',value=time,inline=False)
-    await ctx.add_roles(role2)
+    await bot.add_roles(role_mute)
     await ctx.send(embed = emb)
 
 @bot.command()
