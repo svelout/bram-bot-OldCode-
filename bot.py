@@ -19,9 +19,9 @@ async def on_member_join(ctx):
     role = discord.utils.get(ctx.guild.roles, name='•member•')#•member•
     await ctx.add_roles(role)
 
-@bot.command()
+@bot.command(name='kick')
 @commands.has_permissions(view_audit_log=True)
-async def on_member_kick(ctx, member : discord.Member,reason):
+async def kick(ctx, member : discord.Member,reason):
     role_mute = discord.utils.get(ctx.guild.roles, id=822120846725218385)
     emb = discord.Embed(title='Mute', color=0xff0000)
     emb.add_field(name='Moderator',value=ctx.message.author.mention,inline=False)
