@@ -31,7 +31,7 @@ async def mute(ctx, member : discord.Member=None, *,reason=None, time=None):
     emb.add_field(name='Member',value=member.mention,inline=False)
     emb.add_field(name='Reason ',value=reason,inline=False)
     emb.add_field(name='Time',value=time,inline=False)
-    await bot.add_roles(role_mute)
+    await member.add_roles(role_mute)
     await ctx.send(embed = emb)
 
 @bot.command()
