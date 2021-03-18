@@ -22,7 +22,7 @@ async def on_member_join(ctx):
 @bot.command(name='kick')
 @commands.has_permissions(view_audit_log=True)
 async def kick(ctx, member : discord.Member,reason):
-    emb = discord.Embed(title='Mute', color=0xff0000)
+    emb = discord.Embed(title='Kick', color=0xff0000)
     emb.add_field(name='Moderator',value=ctx.message.author.mention,inline=False)
     emb.add_field(name='Member',value=member.mention,inline=False)
     emb.add_field(name='Reason',value=reason,inline=False)
