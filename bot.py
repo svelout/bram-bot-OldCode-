@@ -17,7 +17,6 @@ async def on_ready():
 @bot.event
 async def on_member_join(ctx):
     role = discord.utils.get(ctx.guild.roles, name='•member•')#•member•
-    member = guild.member
     await ctx.add_roles(role)
     await ctx.member.send(f'Привет {member.mention}! Добро пожаловать на сервер редьюсеров, здесь ты можешь найти себе много новых собеседников и просто приятно провести время. Удачи!')
 
