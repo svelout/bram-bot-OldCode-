@@ -1,9 +1,9 @@
 import discord
 from discord.ext.commands import bot
 from discord.ext import commands
-from discord import guild, member, user
+from discord import guild, member, member, user
 import asyncio
-from time import time
+import time
 
 intents = discord.Intents.default()
 intents.members = True
@@ -33,7 +33,7 @@ async def kick(ctx, member : discord.Member,reason):
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
-async def mute(ctx, member : discord.Member,reason):
+async def mute(ctx, member : discord.Member,reason,time):
     rolemute = discord.utils.get(ctx.guild.roles, id=822120846725218385)
     emb = discord.Embed(title='Задержан', color=0xff0000)
     emb.add_field(name='Модератор',value=ctx.message.author.mention,inline=False)
@@ -68,8 +68,13 @@ async def unban(ctx, *, member):
         if (user.name, user.discriminator) == (member_name, member_discriminator):
             await ctx.guild.unban(user)
             await ctx.send(f'{user.mention} был разбанен')
-            await member.send(f'Вы были разбанены на сервере {guild.name}')
+            await user.send(f'Вы были разбанены на сервере {guild.name}')
             return
+
+@bot.command()
+@commands.has_permissions(view_audit_log=True)
+async def unmute(ctx, *, member):
+    await member.remove_roles(822120846725218385)
        
 
 bot.run('Nzc2NTMxOTc4OTcxMTE5NjQ2.X62Pww.Zzq1j2Z8LycA-W8n4cW99DsiFzU')
