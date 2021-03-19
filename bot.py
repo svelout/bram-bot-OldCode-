@@ -35,7 +35,7 @@ async def kick(ctx, member : discord.Member,reason):
 @commands.has_permissions(view_audit_log=True)
 async def mute(ctx, member : discord.Member,reason):
     rolemute = discord.utils.get(ctx.guild.roles, id=822120846725218385)
-    emb = discord.Embed(title='Mute', color=0xff0000)
+    emb = discord.Embed(title='Задержан', color=0xff0000)
     emb.add_field(name='Модератор',value=ctx.message.author.mention,inline=False)
     emb.add_field(name='Участник',value=member.mention,inline=False)
     emb.add_field(name='Причина',value=reason,inline=False)
@@ -52,16 +52,8 @@ async def ban(ctx, member : discord.Member,reason):
     emb.add_field(name='Модератор',value=ctx.message.author.mention,inline=False)
     emb.add_field(name='Участник',value=member.mention,inline=False)
     emb.add_field(name='Причина',value=reason,inline=False)
-    emb.add_field(name='Время',value=time,inline=False)
     await member.ban()
     await ctx.send(embed=emb)
-    if time == None:
-        await member.send(f'Вы были забанены на сервере по причине:{reason}, навсегда')
-    else:
-        await member.send(f'Вы были забанены на сервере по причине:{reason}, время:{time}')
-    await asyncio.sleep()
-    await member.unban()
-    
-
+    await member.send(f'Вы были забанены на сервере по причине:{reason}')
 
 bot.run('Nzc2NTMxOTc4OTcxMTE5NjQ2.X62Pww.Zzq1j2Z8LycA-W8n4cW99DsiFzU')
