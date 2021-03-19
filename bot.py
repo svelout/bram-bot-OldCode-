@@ -59,7 +59,7 @@ async def ban(ctx, member : discord.Member,reason):
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
 async def unban(ctx, member : discord.Member):
-    await member.unban()
+    await user.unban()
     await member.send('Вы были разбанены на сервере')
     
 
