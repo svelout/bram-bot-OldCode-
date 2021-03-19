@@ -58,11 +58,18 @@ async def ban(ctx, member : discord.Member,reason):
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
-async def unban(ctx, member : discord.Member):
-    unmem = member.id
-    await member.unban(unmem)
-    await member.send('Вы были разбанены на сервере')
-    
+async def unban(ctx, *, member):
+    banned_users = await ctx.guild.bans()
+    member_name, member_discriminator = member.split('#')
+ 
+    for ban_entry in banned_users:
+        user = ban_entry.user
 
+        if (user.name, user.discriminator) == (member_name, member_discriminator):
+            await ctx.guild.unban(user)
+            await ctx.send(f'{user.mention} был разбанен')
+            await member.send(f'Вы были разбанены на сервере {guild.name}')
+            return
+       
 
 bot.run('Nzc2NTMxOTc4OTcxMTE5NjQ2.X62Pww.Zzq1j2Z8LycA-W8n4cW99DsiFzU')
