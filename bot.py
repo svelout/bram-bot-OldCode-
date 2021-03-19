@@ -56,4 +56,12 @@ async def ban(ctx, member : discord.Member,reason):
     await ctx.send(embed=emb)
     await member.send(f'Вы были забанены на сервере по причине:{reason}')
 
+@bot.command()
+@commands.has_permissions(view_audit_log=True)
+async def unban(ctx, member : discord.Member):
+    await member.unban()
+    await member.send('Вы были разбанены на сервере')
+    
+
+
 bot.run('Nzc2NTMxOTc4OTcxMTE5NjQ2.X62Pww.Zzq1j2Z8LycA-W8n4cW99DsiFzU')
