@@ -44,7 +44,7 @@ async def mute(ctx, member : discord.Member,reason):
    
     await member.add_roles(rolemute, reason=reason)
     await ctx.send(f'{member.mention} был арестован по причине {reason}')
-    await member.send(f'Вы были арестованына сервере {guild.name} по причине {reason}')
+    await member.send(f'Вы были арестованы на сервере {guild.name} по причине {reason}')
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
@@ -74,7 +74,11 @@ async def unban(ctx, *, member):
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
 async def unmute(ctx, *, member):
-    await member.remove_roles(822120846725218385)
+    rolemute = discord.utils.get(ctx.guild.roles, name='Задержан')
+    if not rolemute:
+        await ctx.send('Данный участник не арестован')
+        return
+    await member.remove_roles(rolemute)
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
