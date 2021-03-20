@@ -68,13 +68,26 @@ async def unban(ctx, *, member):
         if (user.name, user.discriminator) == (member_name, member_discriminator):
             await ctx.guild.unban(user)
             await ctx.send(f'{user.mention} был разбанен')
-            await user.send(f'Вы были разбанены на сервере {guild.name}')
             return
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
 async def unmute(ctx, *, member):
     await member.remove_roles(822120846725218385)
-       
+
+@bot.command()
+@commands.has_permissions(view_audit_log=True)
+async def tempban(ctx, member : discord.Member,reason):
+    emb = discord.Embed(title='Tempban', color=0xff0000)
+    emb.add_field(name='Модератор',value=ctx.message.author.mention,inline=False)
+    emb.add_field(name='Участник',value=member.mention,inline=False)
+    emb.add_field(name='Причина',value=reason,inline=False)
+    emb.add_field(name='Время',value=time,inline=False)
+    await member.ban()
+    await ctx.send(embed=emb)
+    await member.send(f'Вы были забанены на сервере по причине:{reason}')
+    await asyncio.sleep()
+    await member.unban()
+
 
 bot.run('Nzc2NTMxOTc4OTcxMTE5NjQ2.X62Pww.Zzq1j2Z8LycA-W8n4cW99DsiFzU')
