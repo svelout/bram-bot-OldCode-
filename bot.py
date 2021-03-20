@@ -13,7 +13,6 @@ bot = commands.Bot(command_prefix=".", intents=intents)
 
 @bot.event
 async def on_ready():
-    await client.change_status(status=discord.Status.idle, activity=discord.Game('Штаб-ФСБ'))
     print("BOT READY")
 
 @bot.event
@@ -39,7 +38,6 @@ async def mute(ctx, member : discord.Member,reason):
     rolemute = discord.utils.get(ctx.guild.roles, name='Задержан')
     rolemem = discord.utils.get(ctx.guild.roles, id=817487190720118825)
     guild = ctx.guild
-    time = discord.utils.get(time=None)
     if not rolemute:
         rolemute = await guild.create_role(name='Задержан')
     
@@ -50,9 +48,6 @@ async def mute(ctx, member : discord.Member,reason):
     await member.remove_roles(rolemem)
     await ctx.send(f'{member.mention} был арестован по причине {reason}')
     await member.send(f'Вы были арестованы на сервере {guild.name} по причине {reason}')
-    await asyncio.sleep(time)
-    await member.add_roles(rolemem)
-    await member.remove_roles(rolemute)
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
