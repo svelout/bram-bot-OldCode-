@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord import client, guild, member, member, user
 import asyncio
 import time
+from discord.utils import get
 
 intents = discord.Intents.default()
 intents.members = True
@@ -38,13 +39,14 @@ async def mute(ctx, member : discord.Member,reason):
     rolemute = discord.utils.get(ctx.guild.roles, name='Задержан')
     rolemem = discord.utils.get(ctx.guild.roles, id=817487190720118825)
     guild = ctx.guild
+    time = discord.utils.get(time=None)
     if not rolemute:
         rolemute = await guild.create_role(name='Задержан')
     
         for channel in guild.channels:
             await channel.set_permissions(rolemute, speak=False, send_message=False, read_message=True, read_message_history=True)
    
-    await member.add_roles(rolemute, reason=reason, time=time)
+    await member.add_roles(rolemute, reason=reason)
     await member.remove_roles(rolemem)
     await ctx.send(f'{member.mention} был арестован по причине {reason}')
     await member.send(f'Вы были арестованы на сервере {guild.name} по причине {reason}')
