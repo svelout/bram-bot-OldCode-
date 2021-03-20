@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord import guild, member, member, user
 import asyncio
 import time
+from aiohttp import client
 
 intents = discord.Intents.default()
 intents.members = True
@@ -12,6 +13,7 @@ bot = commands.Bot(command_prefix=".", intents=intents)
 
 @bot.event
 async def on_ready():
+    await client.change_status(status=discord.Status.idle, activity=discord.Game('Штаб-ФСБ'))
     print("BOT READY")
 
 @bot.event
