@@ -43,10 +43,13 @@ async def mute(ctx, member : discord.Member,reason):
         for channel in guild.channels:
             await channel.set_permissions(rolemute, speak=False, send_message=False, read_message=True, read_message_history=True)
    
-    await member.add_roles(rolemute, reason=reason)
+    await member.add_roles(rolemute, reason=reason, time=time)
     await member.remove_roles(rolemem)
     await ctx.send(f'{member.mention} был арестован по причине {reason}')
     await member.send(f'Вы были арестованы на сервере {guild.name} по причине {reason}')
+    await asyncio.sleep(time)
+    await member.add_roles(rolemem)
+    await member.remove_roles(rolemute)
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
