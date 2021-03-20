@@ -35,6 +35,7 @@ async def kick(ctx, member : discord.Member,reason):
 @commands.has_permissions(view_audit_log=True)
 async def mute(ctx, member : discord.Member,reason):
     rolemute = discord.utils.get(ctx.guild.roles, name='Задержан')
+    rolemem = discord.utils.get(ctx.guild.roles, id=817487190720118825)
     guild = ctx.guild
     if not rolemute:
         rolemute = await guild.create_role(name='Задержан')
@@ -43,6 +44,7 @@ async def mute(ctx, member : discord.Member,reason):
             await channel.set_permissions(rolemute, speak=False, send_message=False, read_message=True, read_message_history=True)
    
     await member.add_roles(rolemute, reason=reason)
+    await member.remove_roles(rolemem)
     await ctx.send(f'{member.mention} был арестован по причине {reason}')
     await member.send(f'Вы были арестованы на сервере {guild.name} по причине {reason}')
 
@@ -79,6 +81,7 @@ async def unmute(ctx, member : discord.Member):
         await ctx.send('Данный участник не арестован')
         return
     await member.remove_roles(rolemute)
+    await ctx.send(f'{member.mention} был освобожден')
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
