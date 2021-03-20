@@ -101,7 +101,7 @@ async def tempban(ctx, member : discord.Member,reason):
     await member.ban()
     await ctx.send(embed=emb)
     await member.send(f'Вы были забанены на сервере по причине:{reason}')
-    await asyncio.sleep()
+    await asyncio.sleep(time)
     await member.unban()
 
 
