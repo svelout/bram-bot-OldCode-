@@ -33,17 +33,18 @@ async def kick(ctx, member : discord.Member,reason):
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
-async def mute(ctx, member : discord.Member,reason,time):
-    rolemute = discord.utils.get(ctx.guild.roles, id=822120846725218385)
-    emb = discord.Embed(title='Задержан', color=0xff0000)
-    emb.add_field(name='Модератор',value=ctx.message.author.mention,inline=False)
-    emb.add_field(name='Участник',value=member.mention,inline=False)
-    emb.add_field(name='Причина',value=reason,inline=False)
-    emb.add_field(name='Время',value=time,inline=False)
-    await member.add_roles(rolemute)
-    await ctx.send(embed = emb)
-    await asyncio.sleep()
-    await member.remove_roles(rolemute)
+async def mute(ctx, member : discord.Member,reason):
+    rolemute = discord.utils.get(ctx.guild.roles, name='Задержан')
+    guild = ctx.guild
+    if not rolemute:
+        rolemute = await guild.create_role(name='Задержан')
+    
+        for channel in guild.channels:
+            await channel.set_permissions(rolemute, speak=False, send_message=False, read_message=True, read_message_history=True)
+   
+    await member.add_roles(rolemute, reason=reason)
+    await ctx.send(f'{member.mention} был арестован по причине {reason}')
+    await member.send(f'Вы были арестованына сервере {guild.name} по причине {reason}')
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
