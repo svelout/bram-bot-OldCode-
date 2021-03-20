@@ -73,7 +73,7 @@ async def unban(ctx, *, member):
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
-async def unmute(ctx, *, member):
+async def unmute(ctx, member : discord.Member):
     rolemute = discord.utils.get(ctx.guild.roles, name='Задержан')
     if not rolemute:
         await ctx.send('Данный участник не арестован')
