@@ -1,10 +1,9 @@
 import discord
 from discord.ext.commands import bot
 from discord.ext import commands
-from discord import guild, member, member, user
+from discord import client, guild, member, member, user
 import asyncio
 import time
-from aiohttp import client
 
 intents = discord.Intents.default()
 intents.members = True
