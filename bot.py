@@ -102,20 +102,21 @@ async def tempban(ctx, member : discord.Member,reason):
 
 
 @bot.event
-async def on_voice_state_update(self, member, before, after):
+async def on_voice_state_update(ctx, self, member, before, after):
+    logchannel = discord.utils.get(ctx.guild.channels, id=818896571928281099)
     if member.bot:
         return
     if not before.channel:
-        print(f'{member.name} joined {after.channel.name}')
+        logchannel.send(f'{member.name} joined {after.channel.name}')
 
     if before.channel and not after.channel:
-        print("User left channel")
+        logchannel.send("User left channel")
 
     if before.channel and after.channel:
         if before.channel.id != after.channel.id:
-            print("user switched voice channel")
+            logchannel.send("user switched voice channel")
         else:
-            print("Something else happened")
+            logchannel.send("Something else happened")
 
 @bot.event
 async def on_voice_state_update(ctx, member, before, after):
