@@ -118,27 +118,4 @@ async def on_voice_state_update(ctx, self, member, before, after):
         else:
             logchannel.send("Something else happened")
 
-@bot.event
-async def on_voice_state_update(ctx, member, before, after):
-    if after.channel != None:
-        if after.channel.id == 818882604681658441:
-            for guild in bot.guilds:
-                categoryvoice = discord.utils.get(ctx.guild.categories, id=817599060419936256)
-                channel2 = await guild.create_voice_channel(name=f'{member.display_name}', category=categoryvoice)
-                await channel2.set_permissions(member, connect=True, mute_members=True, manage_channels=True)
-                await member.move_to(channel2)
-
-                def check(x, y, z):
-                    return len(channel2.members) == 0
-                await bot.wait_for('voice_state_update', check=check)
-                await channel2.delete()
-
-
-
-    
-
-
-
-
-
 bot.run('Nzc2NTMxOTc4OTcxMTE5NjQ2.X62Pww.Zzq1j2Z8LycA-W8n4cW99DsiFzU')
