@@ -5,15 +5,9 @@ from discord import client, guild, member, member, user
 import asyncio
 import time
 from discord.utils import get
-import levelsys
 
 intents = discord.Intents.default()
 intents.members = True
-
-cogs = [levelsys]
-
-for i in range(len(cogs)):
-    cogs[i].setup(client)
 
 bot = commands.Bot(command_prefix=".", intents=intents)
 
