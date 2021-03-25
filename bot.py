@@ -36,15 +36,20 @@ async def mute(ctx, member : discord.Member,reason):
     rolemute = discord.utils.get(ctx.guild.roles, name='Задержан')
     rolemem = discord.utils.get(ctx.guild.roles, id=817487190720118825)
     guild = ctx.guild
+    emb = discord.Embed(title='Mute', color=0xff0000)
+    emb.add_field(name='Модератор', value=ctx.message.author.mention, inline=False)
+    emb.add_field(name='Участник', value=member.mention, inline=False)
+    emb.add_field(name='Причина', value=reason, inline=False)
+    emb.add_field(name='Время', value=time, inline=False)
     if not rolemute:
         rolemute = await guild.create_role(name='Задержан')
     
         for channel in guild.channels:
             await channel.set_permissions(rolemute, speak=False, send_message=False, read_message=True, read_message_history=True)
-   
-    await member.add_roles(rolemute, reason=reason, time=time)
+
+    await member.add_roles(rolemute)
     await member.remove_roles(rolemem)
-    await ctx.send(f'{member.mention} был арестован по причине {reason}, на {time}')
+    await ctx.send(embed=emb)
     await member.send(f'Вы были арестованы на сервере {guild.name} по причине {reason}, на {time}')
     await time.sleep(time)
     await member.add_roles(rolemem)
