@@ -1,19 +1,10 @@
-import discord
-import pytz
-from discord.ext.commands import bot
-from discord.ext import commands
-from discord import client, guild, member, member, user
 import time
-from discord.utils import get
-from datetime import datetime
-
-from pip._vendor import requests
+import discord
+from discord.ext import commands
 from pytz import timezone
 
 intents = discord.Intents.default()
 intents.members = True
-
-now = datetime.now()
 
 bot = commands.Bot(command_prefix=".", intents=intents)
 
