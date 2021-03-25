@@ -15,7 +15,7 @@ now = datetime.now()
 
 bot = commands.Bot(command_prefix=".", intents=intents)
 
-Russia = pytz.timezone('Europe/Russia')
+Russia = pytz.timezone('Europe/Moscow')
 datetime_Russia = datetime.now(Russia)
 fmt = '%Y-%m-%d %H:%M:%S %Z%z'
 
