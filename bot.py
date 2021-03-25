@@ -1,7 +1,7 @@
 import time
 import discord
 from discord.ext import commands
-from pytz import timezone
+from discord.ext.commands import bot
 
 intents = discord.Intents.default()
 intents.members = True
