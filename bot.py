@@ -122,9 +122,10 @@ async def on_voice_state_update(ctx, self, member, before, after):
             logchannel.send("Something else happened")
 
 @bot.event
-async def on_voice_state_update(message,member, after):
-    if after.channel != None:
-        if after.channel.id == 818882604681658441:
+async def on_voice_state_update(message,member,ctx):
+    guild = ctx.guild
+    if guild.channel != None:
+        if guild.channel.id == 818882604681658441:
             for guild in bot.guilds:
                 maincategory = discord.utils.get(
                     guild.categories, id=817599060419936256)
