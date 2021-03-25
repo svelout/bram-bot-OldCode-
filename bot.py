@@ -44,21 +44,25 @@ async def mute(ctx, member : discord.Member,reason):
         for channel in guild.channels:
             await channel.set_permissions(rolemute, speak=False, send_message=False, read_message=True, read_message_history=True)
    
-    await member.add_roles(rolemute, reason=reason)
+    await member.add_roles(rolemute, reason=reason, time=time)
     await member.remove_roles(rolemem)
-    await ctx.send(f'{member.mention} был арестован по причине {reason}')
-    await member.send(f'Вы были арестованы на сервере {guild.name} по причине {reason}')
+    await ctx.send(f'{member.mention} был арестован по причине {reason}, на {time}')
+    await member.send(f'Вы были арестованы на сервере {guild.name} по причине {reason}, на {time}')
+    await time.sleep(time)
+    await member.add_roles(rolemem)
+    await member.remove_roles(rolemute)
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
 async def ban(ctx, member : discord.Member,reason):
+    guild = ctx.guild
     emb = discord.Embed(title='Ban', color=0xff0000)
     emb.add_field(name='Модератор',value=ctx.message.author.mention,inline=False)
     emb.add_field(name='Участник',value=member.mention,inline=False)
     emb.add_field(name='Причина',value=reason,inline=False)
     await member.ban()
     await ctx.send(embed=emb)
-    await member.send(f'Вы были забанены на сервере по причине:{reason}')
+    await member.send(f'Вы были забанены на сервере {guild.name} по причине:{reason}')
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
@@ -80,11 +84,12 @@ async def unmute(ctx, member : discord.Member):
     rolemute = discord.utils.get(ctx.guild.roles, name='Задержан')
     rolemem = discord.utils.get(ctx.guild.roles, id=817487190720118825)
     if not rolemute:
-        await ctx.send('Данный участник не арестован')
+        await ctx.send(f'{member.mention} не арестован')
         return
-    await member.remove_roles(rolemute)
-    await member.add_roles(rolemem)
-    await ctx.send(f'{member.mention} был освобожден')
+    if member.has_role(rolemute):
+        await member.remove_roles(rolemute)
+        await member.add_roles(rolemem)
+        await ctx.send(f'{member.mention} был освобожден')
 
 @bot.command()
 @commands.has_permissions(view_audit_log=True)
@@ -97,7 +102,7 @@ async def tempban(ctx, member : discord.Member,reason):
     await member.ban()
     await ctx.send(embed=emb)
     await member.send(f'Вы были забанены на сервере по причине:{reason}')
-    await asyncio.sleep(time)
+    await time.sleep(time)
     await member.unban()
 
 
