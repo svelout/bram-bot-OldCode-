@@ -128,9 +128,8 @@ async def on_voice_state_update(ctx, self, member, before, after):
 
 @bot.event
 async def on_voice_state_update(message,member,ctx):
-    guild = ctx.guild
-    if guild.channel != None:
-        if guild.channel.id == 818882604681658441:
+    if ctx.channel != None:
+        if ctx.channel.id == 818882604681658441:
             for guild in bot.guilds:
                 maincategory = discord.utils.get(
                     guild.categories, id=817599060419936256)
