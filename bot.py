@@ -122,7 +122,7 @@ async def on_voice_state_update(ctx, self, member, before, after):
             logchannel.send("Something else happened")
 
 @bot.event
-async def on_voice_state_update(message,ctx,member, before, after):
+async def on_voice_state_update(message,member, after):
     if after.channel != None:
         if after.channel.id == 818882604681658441:
             for guild in bot.guilds:
