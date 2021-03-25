@@ -2,18 +2,24 @@ import discord
 from discord.ext.commands import bot
 from discord.ext import commands
 from discord import client, guild, member, member, user
-import asyncio
 import time
 from discord.utils import get
+from datetime import datetime
 
 intents = discord.Intents.default()
 intents.members = True
 
+now = datetime.now()
+
 bot = commands.Bot(command_prefix=".", intents=intents)
+
+tz_Russia = pytz.timezone('Europe/Russia')
+datetime_Russia = datetime.now(tz_Russia)
 
 @bot.event
 async def on_ready():
-    print("BOT READY")
+    await client.change_presence(status=discord.Status.online, activity=discord.Game("London time:", datetime_Russia.strftime("%H:%M:%S")))
+    print('GO')
 
 @bot.event
 async def on_member_join(ctx):
@@ -122,5 +128,24 @@ async def on_voice_state_update(ctx, self, member, before, after):
             logchannel.send("user switched voice channel")
         else:
             logchannel.send("Something else happened")
+
+@bot.event
+async def on_voice_state_update(message,ctx,member, before, after):
+    if after.channel != None:
+        if after.channel.id == 818882604681658441:
+            for guild in bot.guilds:
+                maincategory = discord.utils.get(
+                    guild.categories, id=817599060419936256)
+                channel2 = await guild.create_voice_channel(name=f'канал {member.display_name}', category=maincategory)
+                await channel2.set_permissions(member, connect=True, mute_members=True, manage_channels=True)
+                await member.move_to(channel2)
+
+                def check(x, y, z):
+                    return len(channel2.members) == 0
+                await bot.wait_for('voice_state_update', check=check)
+                await channel2.delete()
+                name = message.content
+                if message.content.startwith(".voicename" + name):
+                    await channel2.set_name(name)
 
 bot.run('Nzc2NTMxOTc4OTcxMTE5NjQ2.X62Pww.Zzq1j2Z8LycA-W8n4cW99DsiFzU')
