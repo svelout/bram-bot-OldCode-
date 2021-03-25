@@ -134,7 +134,6 @@ async def on_voice_state_update(message,member,ctx):
                 maincategory = discord.utils.get(
                     guild.categories, id=817599060419936256)
                 channel2 = await guild.create_voice_channel(name=f'канал ', category=maincategory)
-                await channel2.set_permissions(member, connect=True, mute_members=True, manage_channels=True)
                 await member.move_to(channel2)
 
                 def check(x, y, z):
