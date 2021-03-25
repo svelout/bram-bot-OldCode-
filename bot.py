@@ -6,6 +6,8 @@ from discord import client, guild, member, member, user
 import time
 from discord.utils import get
 from datetime import datetime
+
+from pip._vendor import requests
 from pytz import timezone
 
 intents = discord.Intents.default()
@@ -15,13 +17,9 @@ now = datetime.now()
 
 bot = commands.Bot(command_prefix=".", intents=intents)
 
-Russia = pytz.timezone('Europe/Moscow')
-datetime_Russia = datetime.now(Russia)
-fmt = '%Y-%m-%d %H:%M:%S %Z%z'
-
 @bot.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.online, activity=discord.Game("Москва:", datetime_Russia.strftime(fmt)))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Моргенчлена"))
     print('GO')
 
 @bot.event
