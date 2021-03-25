@@ -1,4 +1,5 @@
 import discord
+import pytz
 from discord.ext.commands import bot
 from discord.ext import commands
 from discord import client, guild, member, member, user
@@ -14,7 +15,7 @@ now = datetime.now()
 
 bot = commands.Bot(command_prefix=".", intents=intents)
 
-Russia = timezone('Europe/Russia')
+Russia = pytz.timezone('Europe/Russia')
 datetime_Russia = datetime.now(Russia)
 fmt = '%Y-%m-%d %H:%M:%S %Z%z'
 
