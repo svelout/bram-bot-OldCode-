@@ -143,4 +143,4 @@ async def on_voice_state_update(message,member,ctx):
                 if message.content.startwith(".voicename" + name):
                     await channel2.set_name(name)
 
-bot.run('Nzc2NTMxOTc4OTcxMTE5NjQ2.X62Pww.Zzq1j2Z8LycA-W8n4cW99DsiFzU')
+bot.run('TOKEN')
